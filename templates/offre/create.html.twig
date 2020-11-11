@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}
+Création d'une offre
+{% endblock %}
+
+{% block body %}
+
+<h1>Crée une offre</h1>
+
+<div class="container">
+
+<form action="" method="POST">
+{{ form_widget(form.nom , {'attr' : {
+    'placeholder' : 'Entreprise',
+    'class': 'form_offre'
+    } }) }}
+{{ form_widget(form.mission,{'attr' : {
+    'placeholder' : 'Mission',
+    'class': 'form_offre'
+    } }) }}
+
+{{ form_widget(form.lieu, {'attr' : {
+    'placeholder' : 'Lieu',
+    'class': 'form_offre'
+    } }) }}
+
+
+{{ form_widget(form.salaire,  {'attr' : {
+    'placeholder' : 'Salaire',
+    'class': 'form_offre'
+    } }) }}
+
+
+{{ form_widget(form.date) }}
+
+
+    
+{{ form_row(form._token) }}
+
+<br>
+{{ form_widget(form.saveme, { 'label': 'Click me', 'class': 'btn btn-success' }) }}
+
+</form>
+
+
+</div>
+
+{% endblock %}

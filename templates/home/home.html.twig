@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Sweet Home{% endblock %}
+
+{% block body %}
+<div class="container">
+<form method="post" action={{ path('app_login')}}>
+
+{# {% if not app.user %}
+    Bienvenue 
+
+ {% else %}
+
+ {% endif %} #}
+
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>OFFRES</th>
+    </thead>
+ {% for user in users %}
+ <tr>
+    <td>{{user.id}}</td>
+    <td>{{user.username}}</td>
+    <td>{{user.roles | json_encode}}</td>
+    {% for offre in user.offres %}
+        <td>{{offre.nom}}</td>
+    {% endfor %}
+ </tr>
+ 
+
+
+ {% endfor %}
+</div>
+</table>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+{% for item in offre %} 
+<br>
+<div class="container">
+
+    <div class="card border-success mb-5" style="max-width: 50%;">
+
+<div class="card-header bg-transparent border-success font-weight-bold text-danger">{{ item.nom }}
+
+
+        <div class="text-right position-relative text-warning">
+           Offre n° {{item.id}}
+           <p>{{item.date | date}}<p>
+        </div>
+    </div>
+
+        <div class="card-body text-success">
+            <h5 class="card-title text-primary">{{ item.lieu }}</h5>
+            <p class="card-text">{{ item.mission }}</p>
+
+            <div class="text-right">
+            
+                <a href="{{ path('offre_suppression' , { id : item.id })}}" {# onclick="handleDelete()" #} class="fas fa-trash"></a>
+
+                <a href="{{ path('offre_modification' , { id : item.id })}}" class="fa fa-pencil"></a>
+             
+            </div>
+
+        </div>
+
+        <div class="card-footer bg-transparent border-success text-right">{{ item.salaire }} €/an</div>
+
+    </div>
+    <div>
+       <a href="{{ path('offres') }}" class="btn btn-success">Revenir</a>
+    </div>
+ 
+</div>
+
+
+
+
+{% endfor %}
+{% block javascript %}
+
+    <script>   
+
+    function handleDelete(e){
+      
+        if (confirm('Are you sure you want to save this thing into the database?')) {
+            // Save it!
+            console.log('Thing was saved to the database.');
+            } else {
+            // Do nothing!
+            console.log('Thing was not saved to the database.');
+            }
+       
+    }
+    
+     </script>
+
+ {% endblock %}
+
+{% endblock %}

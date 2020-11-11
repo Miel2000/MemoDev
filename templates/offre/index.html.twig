@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OffreController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+</style>
+
+<div class="container">
+
+<h1>Les offres</h1>
+
+<br />
+<div class="offre_list">
+<a href="{{ path('offre_creation') }}" type="button"><i class="fas fa-plus"></i> Ajoutez une offre</a>
+
+    <table class="table text-center">
+        <thead>
+            <th>Options</th>
+            <th>ID</th>
+            <th>Entreprise</th>
+            <th>Mission</th>
+            <th>Lieu</th>
+            <th>Salaire</th>
+            <th>Date</th>
+        </thead>
+
+        {% for offre in offres %}
+        
+        <tr>
+            <td class="d-flex justify-content-around">
+            
+                <a href="{{ path('offre_suppression' , { id : offre.id })}}" style="text-decoration:none;" class="fas fa-trash icon"></a>
+
+                <a href="{{ path('offre_modification' , { id : offre.id })}}" style="text-decoration:none;" class="fa fa-pencil icon"></a>
+
+                <a href="{{ path('offre_details' , { id : offre.id })}}" style="text-decoration:none;" class="fas fa-eye icon"></a>
+
+            </td>
+            <td>{{ offre.id  }}</td>
+            <td>{{ offre.nom }}</td>
+            <td>{{ offre.mission }}</td>
+            <td>{{ offre.lieu }}</td>
+            <td>{{ offre.salaire }}</td>
+            <td>{{ offre.date | date('d/m/y') }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
