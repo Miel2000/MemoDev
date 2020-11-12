@@ -11,8 +11,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
@@ -32,10 +33,12 @@ class OffreType extends AbstractType {
                 'label' => 'Cette offre est d\'actualité',
                 'required' => false
             ])
+
             ->add('user', EntityType::class , [
                 'class' => User::class,
                 'choice_label' => 'email'
             ])
+            
             ->add('saveme', SubmitType::class, [
                 'attr' => ['class' => 'btn-success']
             ]);

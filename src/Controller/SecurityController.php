@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SecurityController extends AbstractController
 {
@@ -66,6 +67,19 @@ class SecurityController extends AbstractController
     {
         return $this->render('security/admin.html.twig', []);
         
+    }
+
+
+    /**
+     * @Route("/profile/{id}", name="security_profile")
+     */
+    public function profile(UserInterface $user, $id)
+    {
+        // dd($this->getUser($id)->getId());
+         
+        return $this->render('security/profile.html.twig', [
+            'user' => $this->getUser($id)->getUsername()
+        ]);
     }
 
 

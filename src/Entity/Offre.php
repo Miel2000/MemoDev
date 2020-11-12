@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\OffreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OffreRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=OffreRepository::class)
  */
-class Offre
+class Offre 
 {
     /**
      * @ORM\Id
@@ -54,6 +55,8 @@ class Offre
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isValid;
+
+
 
     public function getId(): ?int
     {
@@ -143,4 +146,8 @@ class Offre
 
         return $this;
     }
+
+
+
+
 }

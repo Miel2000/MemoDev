@@ -22,20 +22,6 @@ class OffreController extends AbstractController
     {
 
         $all_offres_from_one_user = $offres->findBy(['user' => $this->getUser()->getId()]);
-        
-        // ************* DO NOT DELETE *******************
-        // $userId = $this->getUser()->getId();
-        // $offres = $offres->findBy(['id' => $userId]);
-        // dd($offres->findBy(['id' => $this->getUser()])); 
-        // dd($this->getUser()->getEmail()); 
-        //  dd($offres->findAll());
-        //  $all_offres = $offres->findAll();
-        //  foreach( $all_offres as $offre) {
-        //     if($offre->getUser()->getId() == $userId){
-        //         dd($offre);
-        //     };
-        //  }
-        // dd($offres->findBy(['id' => $this->getUser('id')]));
 
         return $this->render('offre/index.html.twig', [
             'controller_name' => 'OffreController',
@@ -51,22 +37,30 @@ class OffreController extends AbstractController
      * @param MessageService $messageService
      * @return Response
      */
-    public function create(Request $req, OffreRepository $offre, EntityManagerInterface $manager, UserInterface $user, MessageService $messageService ): Response
+    public function create(
+        Request $req,
+        OffreRepository $offre,
+        EntityManagerInterface $manager,
+        UserInterface $user,
+        MessageService $messageService
+        ): Response
     {
-  
+        
         $offre = new Offre();
         $form = $this->createForm(OffreType::class, $offre , [
             'method' => 'POST'
-        ]);
-
+            ]);
+            
+        // $offre->setChrono(1);
         $form->handleRequest($req);
-     
-        if($form->isSubmitted() && $form->isValid()){
+        
 
-            
-            
+        if($form->isSubmitted() && $form->isValid()){
+           
+            // dd($chrono);
+            // $offre->setChrono($chrono++);
             $offre->setUser($user);
-            
+           
             $manager->persist($offre);
             $manager->flush();
             
@@ -101,7 +95,7 @@ class OffreController extends AbstractController
     /**
      * @Route("/offre/modification/{id}", name="offre_modification")
      */
-    public function modifier(Request $req, Offre $offre, EntityManagerInterface $manager, UserInterface $user): Response
+    public function modifier(Request $req, Offre $offre, EntityManagerInterface $manager, UserInterface $user,MessageService $messageService): Response
     {
 
         //  dd($req);
@@ -118,6 +112,8 @@ class OffreController extends AbstractController
 
             $manager->persist($offre);
             $manager->flush();
+
+            $messageService->addSuccess('Votre offre est bien en base de donnée');
 
 
             return $this->redirectToRoute('offres');
