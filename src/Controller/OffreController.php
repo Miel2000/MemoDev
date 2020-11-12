@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Offre;
 use App\Form\OffreType;
-use Doctrine\ORM\EntityManager;
-use App\Repository\UserRepository;
 use App\Repository\OffreRepository;
+use App\Services\MessageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,8 +45,13 @@ class OffreController extends AbstractController
 
     /**
      * @Route("/offre/creation", name="offre_creation")
+     * @param Request $req
+     * @param OffreRepository $offre
+     * @param EntityManagerInterface $manager
+     * @param MessageService $messageService
+     * @return Response
      */
-    public function create(Request $req, OffreRepository $offre, EntityManagerInterface $manager, UserInterface $user ): Response
+    public function create(Request $req, OffreRepository $offre, EntityManagerInterface $manager, UserInterface $user, MessageService $messageService ): Response
     {
   
         $offre = new Offre();
@@ -60,13 +63,16 @@ class OffreController extends AbstractController
      
         if($form->isSubmitted() && $form->isValid()){
 
+            
+            
             $offre->setUser($user);
-
+            
             $manager->persist($offre);
             $manager->flush();
-
-            return $this->redirectToRoute('offres');
-        }
+            
+            $messageService->addSuccess('Votre offre est enregistrée en base de donnée');
+             return $this->redirectToRoute('offres');
+        } 
          
         return $this->render('offre/create.html.twig', [
             'form' => $form->createView(),

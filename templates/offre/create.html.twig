@@ -12,6 +12,12 @@ Création d'une offre
 
 <div class="container">
 
+{# inclusion des message flashes #}
+<div class="m-5">
+	{{ include('services/flash_messages.html.twig') }}
+</div>
+
+
 <form action="" method="POST">
 {{ form_widget(form.nom , {'attr' : {
     'placeholder' : 'Entreprise',
@@ -27,7 +33,6 @@ Création d'une offre
     'class': 'form_offre'
     } }) }}
 
-
 {{ form_widget(form.salaire,  {'attr' : {
     'placeholder' : 'Salaire',
     'class': 'form_offre'
@@ -35,6 +40,8 @@ Création d'une offre
 
 
 {{ form_widget(form.date) }}
+
+{{ form_widget(form.isValid) }}
 
 
     

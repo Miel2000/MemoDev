@@ -12,12 +12,16 @@
 <div class="container">
 
 <h1>Les offres</h1>
+{# inclusion des message flashes #}
+<div class="m-5">
+	{{ include('services/flash_messages.html.twig') }}
+</div>
 
 <br />
 <div class="offre_list">
 <a href="{{ path('offre_creation') }}" type="button"><i class="fas fa-plus"></i> Ajoutez une offre</a>
 
-    <table class="table text-center">
+    <table class="table text-center align-self-center">
         <thead>
             <th>Options</th>
             <th>ID</th>
@@ -26,12 +30,14 @@
             <th>Lieu</th>
             <th>Salaire</th>
             <th>Date</th>
+            <th>Validité</th>
         </thead>
 
         {% for offre in offres %}
         
         <tr>
-            <td class="d-flex justify-content-around">
+        <td class="d-flex justify-content-around ">
+
             
                 <a href="{{ path('offre_suppression' , { id : offre.id })}}" style="text-decoration:none;" class="fas fa-trash icon"></a>
 
@@ -46,6 +52,15 @@
             <td>{{ offre.lieu }}</td>
             <td>{{ offre.salaire }}</td>
             <td>{{ offre.date | date('d/m/y') }}</td>
+
+            {% if offre.isValid == 1 %}
+                <td><i class="fas fa-check text-success"></i></td>
+            {% endif %}
+
+            {% if offre.isValid == 0 %}
+            <td><i class="fas fa-times  text-danger"></i></td>
+            {% endif %}
+            
 
         </tr>
         {% endfor %}
