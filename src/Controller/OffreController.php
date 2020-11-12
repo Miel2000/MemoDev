@@ -54,7 +54,6 @@ class OffreController extends AbstractController
         // $offre->setChrono(1);
         $form->handleRequest($req);
         
-
         if($form->isSubmitted() && $form->isValid()){
            
             // dd($chrono);
@@ -80,12 +79,8 @@ class OffreController extends AbstractController
     public function detail($id, OffreRepository $offre): Response
     {
 
-        //  dd($id);
         $detail_une_offre = $offre->findBy([ 'id' => $id]);
         
-      
-        // dd($offre->findBy(['user' => $this->getUser($id) ]));
-
         return $this->render('offre/detail.html.twig', [
           'offre' => $detail_une_offre
 
@@ -94,12 +89,21 @@ class OffreController extends AbstractController
 
     /**
      * @Route("/offre/modification/{id}", name="offre_modification")
+     * @param Request $req
+     * @param Offre $offre
+     * @param EntityManagerInterface $manager
+     * @param UserInterface $user
+     * @param MessageService $messageService
+     * @return Response
      */
-    public function modifier(Request $req, Offre $offre, EntityManagerInterface $manager, UserInterface $user,MessageService $messageService): Response
+    public function modifier( 
+     Request $req,
+     Offre $offre,
+     EntityManagerInterface $manager,
+     UserInterface $user,
+     MessageService $messageService ): Response
     {
 
-        //  dd($req);
-      
         $form = $this->createForm(OffreType::class, $offre, [
             'method' => 'POST'
         ]);
@@ -131,16 +135,10 @@ class OffreController extends AbstractController
     public function suppression($id, EntityManagerInterface $em, Offre $offre): Response 
     {
 
-        // $monOffre = $offre->findBy(['id' => $id]);
         $em->remove($offre);
         $em->flush();
 
         return $this->redirectToRoute('offres');
-        // dd($id);
-
-        return $this->render('offre/create.html.twig', [
-           'id' => $id
-        ]);
     }
 
 

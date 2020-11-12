@@ -28,7 +28,6 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error
-            
         ]);
     }
 
@@ -56,7 +55,6 @@ class SecurityController extends AbstractController
 
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView(),
-            
             ]);
     }
 
@@ -66,22 +64,17 @@ class SecurityController extends AbstractController
     public function admin()
     {
         return $this->render('security/admin.html.twig', []);
-        
     }
-
 
     /**
      * @Route("/profile/{id}", name="security_profile")
      */
-    public function profile(UserInterface $user, $id)
+    public function profile($id)
     {
-        // dd($this->getUser($id)->getId());
-         
         return $this->render('security/profile.html.twig', [
             'user' => $this->getUser($id)->getUsername()
         ]);
     }
-
 
     /**
      * @Route("/logout", name="app_logout")
