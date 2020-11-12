@@ -25,9 +25,12 @@
     <td>{{user.id}}</td>
     <td>{{user.username}}</td>
     <td>{{user.roles | json_encode}}</td>
-    {% for offre in user.offres %}
-        <td>{{offre.nom}}</td>
-    {% endfor %}
+    <td>
+        {% for offre in user.offres %}
+        {{offre.nom}} <strong>|</strong>
+        {% endfor %}
+    </td>
+
  </tr>
  
 
