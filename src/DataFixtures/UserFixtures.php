@@ -29,7 +29,6 @@ class UserFixtures extends Fixture
 
         for ($i=0; $i <= 10 ; $i++) {
 
-
             $user = new User();
             $user->setEmail($faker->Email)
                 ->setRoles($faker->randomElements(array("ROLE_USER","ROLE_ADMIN"), $count= 1))
@@ -49,8 +48,6 @@ class UserFixtures extends Fixture
 
                 $manager->persist($offre);
             }
-          
-
         }
 
         // $product = new Product();

@@ -117,7 +117,7 @@ class OffreController extends AbstractController
             $manager->persist($offre);
             $manager->flush();
 
-            $messageService->addSuccess('Votre offre est bien en base de donnée');
+            $messageService->addSuccess('Votre offre est bien modifée');
 
 
             return $this->redirectToRoute('offres');
